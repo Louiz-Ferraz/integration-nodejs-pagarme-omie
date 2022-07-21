@@ -1,10 +1,10 @@
 const axios = require('axios');
 
-const instanciaAxios = axios.create({
+const instanciaAxiosPagarme = axios.create({
     baseURL: 'https://api.pagar.me/1/',
     params: {
         api_key: process.env.PAGARME_API_KEY
     }
 });
 
-module.exports = instanciaAxios;
+module.exports = instanciaAxiosPagarme;

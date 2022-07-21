@@ -1,10 +1,10 @@
-const instanciaAxios = require('../services/pagarme');
+const instanciaAxiosPagarme = require('../services/pagarme');
 
 const getTransaction = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const transaction = await instanciaAxios.get(`transactions/${id}`);
+        const transaction = await instanciaAxiosPagarme.get(`transactions/${id}`);
         return res.status(transaction.status).json(transaction.data);
     } catch (error) {
         const { status, data: { errors } } = error.response;
@@ -16,23 +16,23 @@ const getTransaction = async (req, res) => {
 
 const getAllTransactions = async (req, res) => {
     const { status } = req.query;
-    instanciaAxios.defaults.params.status = status;
+    instanciaAxiosPagarme.defaults.params.status = status;
 
     const today = new Date();
     const priorDate = new Date(new Date().setDate(today.getDate() - 90));
-    instanciaAxios.defaults.params.date_updated = `>=${+priorDate}`;
+    instanciaAxiosPagarme.defaults.params.date_updated = `>=${+priorDate}`;
 
-    instanciaAxios.defaults.params.count = 1000;
-    instanciaAxios.defaults.params.page = 1;
+    instanciaAxiosPagarme.defaults.params.count = 1000;
+    instanciaAxiosPagarme.defaults.params.page = 1;
 
     try {
-        let transactions = await instanciaAxios.get(`transactions`);
+        let transactions = await instanciaAxiosPagarme.get(`transactions`);
         let arrayTransactions = transactions.data;
 
         if(arrayTransactions.length >= 1000) { 
             while (transactions.data.length >= 1000) {
-                instanciaAxios.defaults.params.page++;
-                transactions = await instanciaAxios.get(`transactions`);
+                instanciaAxiosPagarme.defaults.params.page++;
+                transactions = await instanciaAxiosPagarme.get(`transactions`);
                 for (let item of transactions.data) {
                     arrayTransactions.push(item);
                 }
@@ -52,7 +52,7 @@ const getPayablesTransaction = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const transactions = await instanciaAxios.get(`transactions/${id}/payables`);
+        const transactions = await instanciaAxiosPagarme.get(`transactions/${id}/payables`);
 
         return res.status(transactions.status).json(transactions.data);
     } catch (error) {
