@@ -1,4 +1,5 @@
 const instanciaAxiosOmie = require('../services/omie');
+const {getClientCodeByCpf} = require('../services/utils/clients');
 const { v4: uuidv4 } = require('uuid');
 
 const getServiceOrder = async (req, res) => {
@@ -36,7 +37,7 @@ const postServiceOrder = async (req,res) => {
         {
           "Cabecalho": {
             "cCodIntOS": uuidv4(),
-            "nCodCli": "7416841385",
+            "nCodCli": await getClientCodeByCpf('432.119.748-14'),
             "dDtPrevisao": "31/08/2022",
             "cEtapa": "20",
             "cCodParc": "000",

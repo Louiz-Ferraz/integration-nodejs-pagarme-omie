@@ -15,6 +15,6 @@ routes.post('/service-order', serviceOrderController.postServiceOrder);
 
 routes.get('/departments', departmentsController.getAllDepartments);
 
-routes.get('/clients/:cpf', clientsController.getClientByCpf);
+routes.get('/clients/:cpf', clientsController.getClient);
 
 module.exports = routes;
