@@ -1,16 +1,13 @@
 const instanciaAxiosPagarme = require('../services/pagarme');
+const { getTransactionById } = require('../services/utils/transactions');
 
 const getTransaction = async (req, res) => {
     const { id } = req.params;
-
     try {
-        const transaction = await instanciaAxiosPagarme.get(`transactions/${id}`);
-        return res.status(transaction.status).json(transaction.data);
+        const transaction = await getTransactionById(id);
+        return res.status(200).json(transaction);
     } catch (error) {
-        const { status, data: { errors } } = error.response;
-        return res.status(status).json(
-            `${errors[0].type}: ${errors[0].parameter_name} - ${errors[0].message}`
-        );
+        return res.status(400).json({ mensagem: error.message });
     }
 }
 
