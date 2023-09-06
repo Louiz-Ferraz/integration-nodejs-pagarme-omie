@@ -1,6 +1,7 @@
 -- DROP TABLE accounts_receivable;
 -- DROP TABLE service_orders;
 -- DROP TABLE departments;
+-- DROP TABLE baixas_codes;
 
 CREATE TABLE IF NOT EXISTS service_orders (
   nfse INT NOT NULL PRIMARY KEY,
@@ -28,5 +29,5 @@ CREATE TABLE IF NOT EXISTS baixas_codes (
 INSERT INTO service_orders
 (nfse, os, turma, valor_liquido, cod_dep)
 VALUES
-(791, 822, 'PM T01 COMP', 178.2, 2961750801),
-(792, 803, 'PM T01 COMP', 198, 2961750801);
+(3831, 3907, 'DBE T02', 855, 7462909974),
+(4087, 4122, 'PDZ T02 INT', 1000, 2961750797);
