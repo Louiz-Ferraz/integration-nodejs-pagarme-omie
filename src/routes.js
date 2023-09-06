@@ -4,6 +4,7 @@ const serviceOrderController = require('./controllers/serviceOrders');
 const departmentsController = require('./controllers/departments');
 const clientsController = require('./controllers/clients');
 const accountsReceivableController = require('./controllers/accountsReceivable');
+const financasController = require('./controllers/financas');
 
 const routes = express();
 
@@ -21,5 +22,8 @@ routes.get('/clients/:cpf', clientsController.getClient);
 routes.get('/accounts-receivable/:id', accountsReceivableController.getAccountsReceivable);
 routes.get('/all-accounts-receivable', accountsReceivableController.getAllAccountsReceivable);
 routes.patch('/accounts-receivable/department', accountsReceivableController.addDepartmentToAccountsReceivable);
+routes.delete('/accounts-receivable/delete/baixa', accountsReceivableController.deleteBaixa);
+
+routes.get('/baixas', financasController.getBaixas);
 
 module.exports = routes;
