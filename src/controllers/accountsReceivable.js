@@ -17,7 +17,7 @@ const getAllAccountsReceivable = async (req, res) => {
       param: [
         {
           "pagina": pagina,
-          "registros_por_pagina": 500,
+          "registros_por_pagina": 1000,
           "apenas_importado_api": "N"
         }
       ]
