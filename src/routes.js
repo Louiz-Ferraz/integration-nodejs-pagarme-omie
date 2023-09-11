@@ -21,7 +21,9 @@ routes.get('/clients/:cpf', clientsController.getClient);
 
 routes.get('/accounts-receivable/:id', accountsReceivableController.getAccountsReceivable);
 routes.get('/all-accounts-receivable', accountsReceivableController.getAllAccountsReceivable);
+routes.get('/all-accounts-receivable-two', accountsReceivableController.getAllAccountsReceivableTwo);
 routes.patch('/accounts-receivable/department', accountsReceivableController.addDepartmentToAccountsReceivable);
+routes.patch('/accounts-receivable/patch', accountsReceivableController.patchAccountsReceivable);
 routes.delete('/accounts-receivable/delete/baixa', accountsReceivableController.deleteBaixa);
 
 routes.get('/baixas', financasController.getBaixas);
