@@ -177,11 +177,41 @@ const patchAccountsReceivable = async (req, res) => {
   }
 }
 
+const addBaixaAccountsReceivable = async (req, res) => {
+  try {
+    let baixaAccountsReceivable = await knex('baixas_accounts_receivable');
+
+    for (let item of baixaAccountsReceivable) {
+      const body = {
+        call: 'LancarRecebimento',
+        app_key: process.env.OMIE_APP_KEY,
+        app_secret: process.env.OMIE_APP_SECRET,
+        param: [
+          {
+            "codigo_lancamento": item.codigo_lancamento_omie,
+            "codigo_conta_corrente": item.codigo_conta_corrente,
+            "valor": item.valor,
+            "data": item.datab,
+            "observacao": item.observacao
+          }
+        ]
+      }
+
+      await instanciaAxiosOmie.post(`financas/contareceber/`, body);
+    }
+
+    return res.status(201).json(baixaAccountsReceivable);
+  } catch (error) {
+    return res.status(400).json({ mensagem: error.message });
+  }
+}
+
 module.exports = {
   getAccountsReceivable,
   getAllAccountsReceivable,
   addDepartmentToAccountsReceivable,
   deleteBaixa,
   getAllAccountsReceivableTwo,
-  patchAccountsReceivable
+  patchAccountsReceivable,
+  addBaixaAccountsReceivable
 }

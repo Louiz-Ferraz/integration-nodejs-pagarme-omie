@@ -3,6 +3,7 @@
 -- DROP TABLE service_orders;
 -- DROP TABLE departments;
 -- DROP TABLE baixas_codes;
+-- DROP TABLE baixas_accounts_receivable;
 
 CREATE TABLE IF NOT EXISTS service_orders (
   nfse INT NOT NULL PRIMARY KEY,
@@ -38,6 +39,14 @@ CREATE TABLE IF NOT EXISTS accounts_receivable_two (
   id_conta_corrente TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS baixas_accounts_receivable (
+  codigo_lancamento_omie TEXT NOT NULL,
+  codigo_conta_corrente TEXT NOT NULL,
+  valor DECIMAL NOT NULL,
+  datab TEXT NOT NULL,
+  observacao TEXT NOT NULL
+);
+
 INSERT INTO service_orders
 (nfse, os, turma, valor_liquido, cod_dep)
 VALUES
@@ -58,3 +67,14 @@ INSERT INTO accounts_receivable_two
 VALUES
 (7534495773, 4391, 4557, 'DBE-DIR-DBE T02', 2111.11, 7562490682, '11079736948DB0291', 7566731700),
 (7534495778, 4328, 4504, 'UXUI-DIR-UXUI T11', 439.83, 7562491985, '08748372510UX1131', 3032861215);
+
+INSERT INTO baixas_accounts_receivable
+(
+  codigo_lancamento_omie,
+  codigo_conta_corrente,
+  valor,
+  datab,
+  observacao
+)
+VALUES
+(7548808949, 3032861215, 108.57, '28/02/2023', 'Baixa via API em 13/09/2023');

@@ -25,6 +25,7 @@ routes.get('/all-accounts-receivable-two', accountsReceivableController.getAllAc
 routes.patch('/accounts-receivable/department', accountsReceivableController.addDepartmentToAccountsReceivable);
 routes.patch('/accounts-receivable/patch', accountsReceivableController.patchAccountsReceivable);
 routes.delete('/accounts-receivable/delete/baixa', accountsReceivableController.deleteBaixa);
+routes.post('/accounts-receivable/baixa', accountsReceivableController.addBaixaAccountsReceivable);
 
 routes.get('/baixas', financasController.getBaixas);
 
