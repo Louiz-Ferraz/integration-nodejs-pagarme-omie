@@ -2,6 +2,7 @@
 -- DROP TABLE accounts_receivable_two;
 -- DROP TABLE service_orders;
 -- DROP TABLE departments;
+-- DROP TABLE accounts;
 -- DROP TABLE baixas_codes;
 -- DROP TABLE baixas_accounts_receivable;
 
@@ -18,10 +19,16 @@ CREATE TABLE IF NOT EXISTS departments (
   codigo TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS accounts (
+  descricao TEXT NOT NULL,
+  codigo TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS accounts_receivable (
   codigo_lancamento_omie TEXT NOT NULL,
   valor_documento DECIMAL NOT NULL,
-  numero_documento_fiscal INT REFERENCES service_orders(nfse)
+  numero_documento_fiscal TEXT,
+  id_conta_corrente TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS baixas_codes (
@@ -77,4 +84,5 @@ INSERT INTO baixas_accounts_receivable
   observacao
 )
 VALUES
-(7548808949, 3032861215, 108.57, '28/02/2023', 'Baixa via API em 13/09/2023');
+(7612158566, 3032861215, 35.72, '31/08/2023', 'Baixa de agosto via API em 19/09/2023'),
+(7625967913, 3032861215, 179.08, '31/08/2023', 'Baixa de agosto via API em 19/09/2023');

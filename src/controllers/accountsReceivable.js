@@ -133,7 +133,8 @@ const getAllAccountsReceivableTwo = async (req, res) => {
         .insert({
           codigo_lancamento_omie: item.codigo_lancamento_omie,
           valor_documento: item.valor_documento,
-          numero_documento_fiscal: item.numero_documento_fiscal
+          numero_documento_fiscal: item.numero_documento_fiscal,
+          id_conta_corrente: item.id_conta_corrente
         });
     }
 

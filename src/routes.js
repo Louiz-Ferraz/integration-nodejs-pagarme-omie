@@ -5,6 +5,7 @@ const departmentsController = require('./controllers/departments');
 const clientsController = require('./controllers/clients');
 const accountsReceivableController = require('./controllers/accountsReceivable');
 const financasController = require('./controllers/financas');
+const accountsController = require('./controllers/accounts');
 
 const routes = express();
 
@@ -28,5 +29,7 @@ routes.delete('/accounts-receivable/delete/baixa', accountsReceivableController.
 routes.post('/accounts-receivable/baixa', accountsReceivableController.addBaixaAccountsReceivable);
 
 routes.get('/baixas', financasController.getBaixas);
+
+routes.get('/all-accounts', accountsController.getAllAccounts);
 
 module.exports = routes;
