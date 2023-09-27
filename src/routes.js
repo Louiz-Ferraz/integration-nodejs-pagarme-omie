@@ -37,5 +37,6 @@ routes.get('/all-accounts', accountsController.getAllAccounts);
 routes.get('/all-accounts-payable', accountsPayableController.getAllAccountsPayable);
 routes.delete('/accounts-payable/delete/baixa', accountsPayableController.deleteBaixaAccountsPayable);
 routes.patch('/accounts-payable/patch', accountsPayableController.patchAccountsPayable);
+routes.post('/accounts-payable/baixa', accountsPayableController.addBaixaAccountsPayable);
 
 module.exports = routes;

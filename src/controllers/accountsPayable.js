@@ -96,8 +96,38 @@ const patchAccountsPayable = async (req, res) => {
   }
 }
 
+const addBaixaAccountsPayable = async (req, res) => {
+  try {
+    let baixaAccountsPayable = await knex('baixas_accounts_payable');
+
+    for (let item of baixaAccountsPayable) {
+      const body = {
+        call: 'LancarPagamento',
+        app_key: process.env.OMIE_APP_KEY,
+        app_secret: process.env.OMIE_APP_SECRET,
+        param: [
+          {
+            "codigo_lancamento": item.codigo_lancamento,
+            "codigo_conta_corrente": item.codigo_conta_corrente,
+            "valor": item.valor,
+            "data": item.datab,
+            "observacao": item.observacao
+          }
+        ]
+      }
+
+      await instanciaAxiosOmie.post(`financas/contapagar/`, body);
+    }
+
+    return res.status(201).json(baixaAccountsPayable);
+  } catch (error) {
+    return res.status(400).json({ mensagem: error.message });
+  }
+}
+
 module.exports = {
   getAllAccountsPayable,
   deleteBaixaAccountsPayable,
-  patchAccountsPayable
+  patchAccountsPayable,
+  addBaixaAccountsPayable
 }

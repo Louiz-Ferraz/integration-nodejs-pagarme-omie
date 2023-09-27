@@ -8,6 +8,7 @@
 -- DROP TABLE baixas_accounts_receivable;
 -- DROP TABLE accounts_payable;
 -- DROP TABLE accounts_payable_two;
+-- DROP TABLE baixas_accounts_payable;
 
 CREATE TABLE IF NOT EXISTS service_orders (
   nfse INT NOT NULL PRIMARY KEY,
@@ -81,6 +82,14 @@ CREATE TABLE IF NOT EXISTS clients (
   nome_fantasia TEXT
 );
 
+CREATE TABLE IF NOT EXISTS baixas_accounts_payable (
+  codigo_lancamento TEXT NOT NULL,
+  codigo_conta_corrente TEXT NOT NULL,
+  valor DECIMAL NOT NULL,
+  datab TEXT NOT NULL,
+  observacao TEXT
+);
+
 INSERT INTO service_orders
 (nfse, os, turma, valor_liquido, cod_dep)
 VALUES
@@ -111,8 +120,8 @@ INSERT INTO baixas_accounts_receivable
   observacao
 )
 VALUES
-(7535987698, 3055866389, 1702.23, '31/08/2023', 'Baixa de agosto via API em 19/09/2023'),
-(7535987755, 3055866389, 1200, '31/08/2023', 'Baixa de agosto via API em 19/09/2023');
+(7560058163, 3032861215, 1279.67, ' 31/08/2023', 'Correção histórica - Baixas de devoluções de clientes'),
+(7560058701, 3032861215, 338, ' 31/08/2023', 'Correção histórica - Baixas de devoluções de clientes');
 
 INSERT INTO accounts_payable_two
 (
