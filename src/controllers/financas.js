@@ -2,7 +2,7 @@ const instanciaAxiosOmie = require('../services/omie');
 const knex = require('../conexao');
 
 const getBaixas = async (req, res) => {
-  const { pagina, contaCorrente } = req.body;
+  const { pagina, contaCorrente, cTpLancamento } = req.body;
 
   try {
     const body = {
@@ -13,7 +13,7 @@ const getBaixas = async (req, res) => {
         {
           "nPagina": pagina,
           "nRegPorPagina": 1000,
-          "cTpLancamento": "BXCR",
+          "cTpLancamento": cTpLancamento,
           "nCodCC": contaCorrente
         }
       ]

@@ -3,7 +3,6 @@ const knex = require('../conexao');
 
 const getAccountsReceivable = async (req, res) => {
   const { id } = req.params;
-
 }
 
 const getAllAccountsReceivable = async (req, res) => {

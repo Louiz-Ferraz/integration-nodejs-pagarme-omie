@@ -3,8 +3,11 @@
 -- DROP TABLE service_orders;
 -- DROP TABLE departments;
 -- DROP TABLE accounts;
+-- DROP TABLE clients;
 -- DROP TABLE baixas_codes;
 -- DROP TABLE baixas_accounts_receivable;
+-- DROP TABLE accounts_payable;
+-- DROP TABLE accounts_payable_two;
 
 CREATE TABLE IF NOT EXISTS service_orders (
   nfse INT NOT NULL PRIMARY KEY,
@@ -54,6 +57,30 @@ CREATE TABLE IF NOT EXISTS baixas_accounts_receivable (
   observacao TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS accounts_payable (
+  codigo_lancamento_omie TEXT NOT NULL,
+  numero_documento_fiscal TEXT,
+  turma TEXT,
+  valor_documento DECIMAL NOT NULL,
+  cod_dep TEXT,
+  id_conta_corrente TEXT NOT NULL,
+  codigo_cliente_fornecedor TEXT NOT NULL,
+  data_vencimento TEXT NOT NULL 
+);
+
+CREATE TABLE IF NOT EXISTS accounts_payable_two (
+  codigo_lancamento_omie TEXT NOT NULL,
+  valor_documento DECIMAL NOT NULL,
+  id_conta_corrente TEXT NOT NULL,
+  numero_documento TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS clients (
+  codigo_cliente_omie TEXT NOT NULL,
+  cnpj_cpf TEXT,
+  nome_fantasia TEXT
+);
+
 INSERT INTO service_orders
 (nfse, os, turma, valor_liquido, cod_dep)
 VALUES
@@ -84,5 +111,16 @@ INSERT INTO baixas_accounts_receivable
   observacao
 )
 VALUES
-(7612158566, 3032861215, 35.72, '31/08/2023', 'Baixa de agosto via API em 19/09/2023'),
-(7625967913, 3032861215, 179.08, '31/08/2023', 'Baixa de agosto via API em 19/09/2023');
+(7535987698, 3055866389, 1702.23, '31/08/2023', 'Baixa de agosto via API em 19/09/2023'),
+(7535987755, 3055866389, 1200, '31/08/2023', 'Baixa de agosto via API em 19/09/2023');
+
+INSERT INTO accounts_payable_two
+(
+  codigo_lancamento_omie,
+  valor_documento,
+  id_conta_corrente,
+  numero_documento
+)
+VALUES
+(7534612798, 374, 3032861215, '38851667802UX1153'),
+(7535973256, 0.5, 3032861215, '04182491564UX027');

@@ -4,6 +4,7 @@ const serviceOrderController = require('./controllers/serviceOrders');
 const departmentsController = require('./controllers/departments');
 const clientsController = require('./controllers/clients');
 const accountsReceivableController = require('./controllers/accountsReceivable');
+const accountsPayableController = require('./controllers/accountsPayable');
 const financasController = require('./controllers/financas');
 const accountsController = require('./controllers/accounts');
 
@@ -19,6 +20,7 @@ routes.post('/service-order', serviceOrderController.postServiceOrder);
 routes.get('/departments', departmentsController.getAllDepartments);
 
 routes.get('/clients/:cpf', clientsController.getClient);
+routes.get('/all-clients', clientsController.getAllClients);
 
 routes.get('/accounts-receivable/:id', accountsReceivableController.getAccountsReceivable);
 routes.get('/all-accounts-receivable', accountsReceivableController.getAllAccountsReceivable);
@@ -31,5 +33,9 @@ routes.post('/accounts-receivable/baixa', accountsReceivableController.addBaixaA
 routes.get('/baixas', financasController.getBaixas);
 
 routes.get('/all-accounts', accountsController.getAllAccounts);
+
+routes.get('/all-accounts-payable', accountsPayableController.getAllAccountsPayable);
+routes.delete('/accounts-payable/delete/baixa', accountsPayableController.deleteBaixaAccountsPayable);
+routes.patch('/accounts-payable/patch', accountsPayableController.patchAccountsPayable);
 
 module.exports = routes;
