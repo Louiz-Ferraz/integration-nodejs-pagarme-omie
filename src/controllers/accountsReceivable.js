@@ -146,13 +146,33 @@ const getAllAccountsReceivableTwo = async (req, res) => {
       accountsReceivables = await instanciaAxiosOmie.post(`financas/contareceber/`, body);
 
       for (let item of accountsReceivables.data.conta_receber_cadastro) {
-        await knex('accounts_receivable')
-          .insert({
-            codigo_lancamento_omie: item.codigo_lancamento_omie,
-            valor_documento: item.valor_documento,
-            numero_documento_fiscal: item.numero_documento_fiscal,
-            id_conta_corrente: item.id_conta_corrente
-          });
+        if (typeof item.distribuicao[0] === "undefined") {
+          await knex('accounts_receivable')
+            .insert({
+              codigo_lancamento_omie: item.codigo_lancamento_omie,
+              valor_documento: item.valor_documento,
+              numero_documento_fiscal: item.numero_documento_fiscal,
+              id_conta_corrente: item.id_conta_corrente,
+              data_registro: item.data_registro,
+              c_numero_contrato: item.cNumeroContrato,
+              c_cod_dep: "N/D",
+              c_des_dep: "N/D",
+              n_per_dep: 0
+            });
+        } else {
+          await knex('accounts_receivable')
+            .insert({
+              codigo_lancamento_omie: item.codigo_lancamento_omie,
+              valor_documento: item.valor_documento,
+              numero_documento_fiscal: item.numero_documento_fiscal,
+              id_conta_corrente: item.id_conta_corrente,
+              data_registro: item.data_registro,
+              c_numero_contrato: item.cNumeroContrato,
+              c_cod_dep: item.distribuicao[0].cCodDep,
+              c_des_dep: item.distribuicao[0].cDesDep,
+              n_per_dep: item.distribuicao[0].nPerDep
+            });
+        }
       }
 
     }

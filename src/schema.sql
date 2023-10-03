@@ -32,7 +32,12 @@ CREATE TABLE IF NOT EXISTS accounts_receivable (
   codigo_lancamento_omie TEXT NOT NULL,
   valor_documento DECIMAL NOT NULL,
   numero_documento_fiscal TEXT,
-  id_conta_corrente TEXT NOT NULL
+  id_conta_corrente TEXT NOT NULL,
+  data_registro DATE NOT NULL,
+  c_numero_contrato TEXT,
+  c_cod_dep TEXT,
+  c_des_dep TEXT,
+  n_per_dep DECIMAL
 );
 
 CREATE TABLE IF NOT EXISTS baixas_codes (
@@ -120,8 +125,8 @@ INSERT INTO baixas_accounts_receivable
   observacao
 )
 VALUES
-(7560058163, 3032861215, 1279.67, ' 31/08/2023', 'Correção histórica - Baixas de devoluções de clientes'),
-(7560058701, 3032861215, 338, ' 31/08/2023', 'Correção histórica - Baixas de devoluções de clientes');
+(7637029643, 7624809405, 13.58, '30/09/2023', 'Baixa de adiantamento via API em 03/10/2023'),
+(7637044103, 7624809405, 1396.7, '30/09/2023', 'Baixa de adiantamento via API em 03/10/2023');
 
 INSERT INTO accounts_payable_two
 (
@@ -133,3 +138,15 @@ INSERT INTO accounts_payable_two
 VALUES
 (7534612798, 374, 3032861215, '38851667802UX1153'),
 (7535973256, 0.5, 3032861215, '04182491564UX027');
+
+INSERT INTO baixas_accounts_payable
+(
+  codigo_lancamento,
+  codigo_conta_corrente,
+  valor,
+  datab,
+  observacao
+)
+VALUES
+(7612134055, 7566731700, 1200, ' 31/08/2023', 'Correção histórica - Baixas de devoluções de clientes'),
+(7612134057, 7566731700, 1866.67, ' 31/08/2023', 'Correção histórica - Baixas de devoluções de clientes');
