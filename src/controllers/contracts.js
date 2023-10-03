@@ -30,6 +30,7 @@ const getAllContracts = async (req, res) => {
               d_vig_inicial: item.cabecalho.dVigInicial,
               d_vig_final: item.cabecalho.dVigFinal,
               n_cod_cli: item.cabecalho.nCodCli,
+              n_cod_cc: item.infAdic.nCodCC,
               n_val_tot_mes: item.cabecalho.nValTotMes,
               c_cod_dep: 'N/D'
             });
@@ -41,6 +42,7 @@ const getAllContracts = async (req, res) => {
               d_vig_inicial: item.cabecalho.dVigInicial,
               d_vig_final: item.cabecalho.dVigFinal,
               n_cod_cli: item.cabecalho.nCodCli,
+              n_cod_cc: item.infAdic.nCodCC,
               n_val_tot_mes: item.cabecalho.nValTotMes,
               c_cod_dep: item.departamentos[0].cCodDep
             });
@@ -58,6 +60,46 @@ const getAllContracts = async (req, res) => {
   }
 }
 
+const patchContracts = async (req, res) => {
+  try {
+    let contracts = await knex('contracts_to_patch');
+
+    for (let item of contracts) {
+      const body = {
+        call: 'AlterarContrato',
+        app_key: process.env.OMIE_APP_KEY,
+        app_secret: process.env.OMIE_APP_SECRET,
+        param: [
+          {
+            "cabecalho": {
+              "nCodCtr": item.n_cod_ctr,
+              "nCodCli": item.n_cod_cli,
+              "cNumCtr": item.c_num_ctr
+            },
+            "departamentos": [
+              {
+                "cCodDep": item.cod_dep,
+                "nValDep": item.n_val_tot_mes,
+                "nPerDep": 100
+              }
+            ],
+            "infAdic": {
+              "nCodCC": item.n_cod_cc
+            }
+          }
+        ]
+      }
+
+      await instanciaAxiosOmie.post(`servicos/contrato/`, body);
+    }
+
+    return res.status(201).json(contracts);
+  } catch (error) {
+    return res.status(400).json({ mensagem: error.message });
+  }
+}
+
 module.exports = {
-  getAllContracts
+  getAllContracts,
+  patchContracts
 }

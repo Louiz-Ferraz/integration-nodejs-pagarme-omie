@@ -41,5 +41,6 @@ routes.patch('/accounts-payable/patch', accountsPayableController.patchAccountsP
 routes.post('/accounts-payable/baixa', accountsPayableController.addBaixaAccountsPayable);
 
 routes.get('/contracts', contractsController.getAllContracts);
+routes.patch('/contracts/patch', contractsController.patchContracts);
 
 module.exports = routes;
