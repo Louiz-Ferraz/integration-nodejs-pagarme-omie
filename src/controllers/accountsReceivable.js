@@ -108,16 +108,16 @@ const deleteBaixa = async (req, res) => {
 }
 
 const getAllAccountsReceivableTwo = async (req, res) => {
-  const { pagina, filtrar_conta_corrente } = req.body;
+  const { filtrar_conta_corrente } = req.body;
 
   try {
-    const body = {
+    let body = {
       call: 'ListarContasReceber',
       app_key: process.env.OMIE_APP_KEY,
       app_secret: process.env.OMIE_APP_SECRET,
       param: [
         {
-          "pagina": pagina,
+          "pagina": 1,
           "registros_por_pagina": 1000,
           "apenas_importado_api": "N",
           "filtrar_conta_corrente": filtrar_conta_corrente
@@ -125,16 +125,36 @@ const getAllAccountsReceivableTwo = async (req, res) => {
       ]
     }
 
-    const accountsReceivables = await instanciaAxiosOmie.post(`financas/contareceber/`, body);
+    let accountsReceivables = await instanciaAxiosOmie.post(`financas/contareceber/`, body);
 
-    for (let item of accountsReceivables.data.conta_receber_cadastro) {
-      await knex('accounts_receivable')
-        .insert({
-          codigo_lancamento_omie: item.codigo_lancamento_omie,
-          valor_documento: item.valor_documento,
-          numero_documento_fiscal: item.numero_documento_fiscal,
-          id_conta_corrente: item.id_conta_corrente
-        });
+    for (let nPagina = 1; nPagina <= accountsReceivables.data.total_de_paginas; nPagina++) {
+
+      body = {
+        call: 'ListarContasReceber',
+        app_key: process.env.OMIE_APP_KEY,
+        app_secret: process.env.OMIE_APP_SECRET,
+        param: [
+          {
+            "pagina": nPagina,
+            "registros_por_pagina": 1000,
+            "apenas_importado_api": "N",
+            "filtrar_conta_corrente": filtrar_conta_corrente
+          }
+        ]
+      }
+
+      accountsReceivables = await instanciaAxiosOmie.post(`financas/contareceber/`, body);
+
+      for (let item of accountsReceivables.data.conta_receber_cadastro) {
+        await knex('accounts_receivable')
+          .insert({
+            codigo_lancamento_omie: item.codigo_lancamento_omie,
+            valor_documento: item.valor_documento,
+            numero_documento_fiscal: item.numero_documento_fiscal,
+            id_conta_corrente: item.id_conta_corrente
+          });
+      }
+
     }
 
     return res.status(accountsReceivables.status).json(accountsReceivables.data);
