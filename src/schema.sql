@@ -9,6 +9,7 @@
 -- DROP TABLE accounts_payable;
 -- DROP TABLE accounts_payable_two;
 -- DROP TABLE baixas_accounts_payable;
+-- DROP TABLE contracts;
 
 CREATE TABLE IF NOT EXISTS service_orders (
   nfse INT NOT NULL PRIMARY KEY,
@@ -95,6 +96,16 @@ CREATE TABLE IF NOT EXISTS baixas_accounts_payable (
   observacao TEXT
 );
 
+CREATE TABLE IF NOT EXISTS contracts (
+  n_cod_ctr TEXT NOT NULL,
+  c_num_ctr TEXT NOT NULL,
+  d_vig_inicial DATE NOT NULL,
+  d_vig_final DATE NOT NULL,
+  n_cod_cli TEXT NOT NULL,
+  n_val_tot_mes DECIMAL NOT NULL,
+  c_cod_dep TEXT
+);
+
 INSERT INTO service_orders
 (nfse, os, turma, valor_liquido, cod_dep)
 VALUES
@@ -113,8 +124,8 @@ INSERT INTO accounts_receivable_two
   id_conta_corrente
 )
 VALUES
-(7534495773, 4391, 4557, 'DBE-DIR-DBE T02', 2111.11, 7562490682, '11079736948DB0291', 7566731700),
-(7534495778, 4328, 4504, 'UXUI-DIR-UXUI T11', 439.83, 7562491985, '08748372510UX1131', 3032861215);
+(7624863549, 9673, 0, 'UXUI-DIR-UXUI T14', 396.5, 7562491991, '13046439725UX1441', 3032861215),
+(7624863579, 9674, 0, 'OND-DIR-On Demand', 765, 7561994157, '13869858729Onnd97', 3032861215);
 
 INSERT INTO baixas_accounts_receivable
 (
