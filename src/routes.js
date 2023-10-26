@@ -32,6 +32,7 @@ routes.delete('/accounts-receivable/delete/baixa', accountsReceivableController.
 routes.post('/accounts-receivable/baixa', accountsReceivableController.addBaixaAccountsReceivable);
 
 routes.get('/baixas', financasController.getBaixas);
+routes.get('/baixas-complete', financasController.getBaixasComplete);
 
 routes.get('/all-accounts', accountsController.getAllAccounts);
 

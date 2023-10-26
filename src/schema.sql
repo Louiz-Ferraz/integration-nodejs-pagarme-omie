@@ -5,11 +5,13 @@
 -- DROP TABLE accounts;
 -- DROP TABLE clients;
 -- DROP TABLE baixas_codes;
+-- DROP TABLE baixas_complete;
 -- DROP TABLE baixas_accounts_receivable;
 -- DROP TABLE accounts_payable;
 -- DROP TABLE accounts_payable_two;
 -- DROP TABLE baixas_accounts_payable;
 -- DROP TABLE contracts;
+-- DROP TABLE contracts_to_patch;
 
 CREATE TABLE IF NOT EXISTS service_orders (
   nfse INT NOT NULL PRIMARY KEY,
@@ -43,6 +45,16 @@ CREATE TABLE IF NOT EXISTS accounts_receivable (
 
 CREATE TABLE IF NOT EXISTS baixas_codes (
   codigo_baixa TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS baixas_complete (
+  nCodBaixa TEXT NOT NULL,
+  cCodCateg TEXT NOT NULL,
+  cStatus TEXT NOT NULL,
+  dDtCredito DATE NOT NULL,
+  nCodCC TEXT NOT NULL,
+  nCodCliente TEXT NOT NULL,
+  nValorMovCC TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS accounts_receivable_two (
@@ -102,8 +114,18 @@ CREATE TABLE IF NOT EXISTS contracts (
   d_vig_inicial DATE NOT NULL,
   d_vig_final DATE NOT NULL,
   n_cod_cli TEXT NOT NULL,
+  n_cod_cc TEXT NOT NULL,
   n_val_tot_mes DECIMAL NOT NULL,
   c_cod_dep TEXT
+);
+
+CREATE TABLE IF NOT EXISTS contracts_to_patch (
+  n_cod_ctr TEXT NOT NULL,
+  n_cod_cli TEXT NOT NULL,
+  c_num_ctr TEXT NOT NULL,
+  cod_dep TEXT NOT NULL,
+  n_val_tot_mes DECIMAL NOT NULL,
+  n_cod_cc TEXT NOT NULL
 );
 
 INSERT INTO service_orders
@@ -161,3 +183,16 @@ INSERT INTO baixas_accounts_payable
 VALUES
 (7612134055, 7566731700, 1200, ' 31/08/2023', 'Correção histórica - Baixas de devoluções de clientes'),
 (7612134057, 7566731700, 1866.67, ' 31/08/2023', 'Correção histórica - Baixas de devoluções de clientes');
+
+INSERT INTO contracts_to_patch
+(
+  n_cod_ctr,
+  n_cod_cli,
+  c_num_ctr,
+  cod_dep,
+  n_val_tot_mes,
+  n_cod_cc
+)
+VALUES
+(7622403613, 7614590883, '49891547892UX1434', 7562491991, 337, 3032861215),
+(7622403615, 7614590857, '02642979113UX1432', 7562491991, 497.33, 3032861215);
