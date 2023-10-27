@@ -30,6 +30,7 @@ routes.patch('/accounts-receivable/department', accountsReceivableController.add
 routes.patch('/accounts-receivable/patch', accountsReceivableController.patchAccountsReceivable);
 routes.delete('/accounts-receivable/delete/baixa', accountsReceivableController.deleteBaixa);
 routes.post('/accounts-receivable/baixa', accountsReceivableController.addBaixaAccountsReceivable);
+routes.post('/accounts-receivable/baixa-discount', accountsReceivableController.addBaixaDiscountAccountsReceivable);
 
 routes.get('/baixas', financasController.getBaixas);
 routes.get('/baixas-complete', financasController.getBaixasComplete);
