@@ -125,9 +125,35 @@ const addBaixaAccountsPayable = async (req, res) => {
   }
 }
 
+const deleteAccountsPayable = async (req, res) => {
+  try {
+    let deleteAccountsPayable = await knex('accounts_payable_delete');
+
+    for (let item of deleteAccountsPayable) {
+      const body = {
+        call: 'ExcluirContaPagar',
+        app_key: process.env.OMIE_APP_KEY,
+        app_secret: process.env.OMIE_APP_SECRET,
+        param: [
+          {
+            "codigo_lancamento_omie": item.codigo_lancamento_omie
+          }
+        ]
+      }
+
+      await instanciaAxiosOmie.post(`financas/contapagar/`, body);
+    }
+
+    return res.status(201).json(deleteAccountsPayable);
+  } catch (error) {
+    return res.status(400).json({ mensagem: error.message });
+  }
+}
+
 module.exports = {
   getAllAccountsPayable,
   deleteBaixaAccountsPayable,
   patchAccountsPayable,
-  addBaixaAccountsPayable
+  addBaixaAccountsPayable,
+  deleteAccountsPayable
 }

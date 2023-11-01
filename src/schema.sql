@@ -12,6 +12,7 @@
 -- DROP TABLE baixas_accounts_payable;
 -- DROP TABLE contracts;
 -- DROP TABLE contracts_to_patch;
+-- DROP TABLE accounts_payable_delete;
 
 CREATE TABLE IF NOT EXISTS service_orders (
   nfse INT NOT NULL PRIMARY KEY,
@@ -128,6 +129,10 @@ CREATE TABLE IF NOT EXISTS contracts_to_patch (
   n_cod_cc TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS accounts_payable_delete (
+  codigo_lancamento_omie TEXT NOT NULL
+);
+
 INSERT INTO service_orders
 (nfse, os, turma, valor_liquido, cod_dep)
 VALUES
@@ -204,3 +209,11 @@ INSERT INTO baixas_codes
 VALUES
 ('7635905450'),
 ('7635905462');
+
+INSERT INTO accounts_payable_delete
+(
+  codigo_lancamento_omie
+)
+VALUES
+('7535973256'),
+('7535973258');

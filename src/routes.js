@@ -41,6 +41,7 @@ routes.get('/all-accounts-payable', accountsPayableController.getAllAccountsPaya
 routes.delete('/accounts-payable/delete/baixa', accountsPayableController.deleteBaixaAccountsPayable);
 routes.patch('/accounts-payable/patch', accountsPayableController.patchAccountsPayable);
 routes.post('/accounts-payable/baixa', accountsPayableController.addBaixaAccountsPayable);
+routes.delete('/accounts-payable/delete', accountsPayableController.deleteAccountsPayable);
 
 routes.get('/contracts', contractsController.getAllContracts);
 routes.patch('/contracts/patch', contractsController.patchContracts);
