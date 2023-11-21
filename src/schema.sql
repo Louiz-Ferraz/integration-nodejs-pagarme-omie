@@ -55,7 +55,9 @@ CREATE TABLE IF NOT EXISTS baixas_complete (
   dDtCredito DATE NOT NULL,
   nCodCC TEXT NOT NULL,
   nCodCliente TEXT NOT NULL,
-  nValorMovCC TEXT
+  nValorMovCC TEXT,
+  cNumDocFiscal TEXT,
+  nDesconto DECIMAL
 );
 
 CREATE TABLE IF NOT EXISTS accounts_receivable_two (

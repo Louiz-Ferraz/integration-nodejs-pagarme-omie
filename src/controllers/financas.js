@@ -68,7 +68,9 @@ const getBaixasComplete = async (req, res) => {
           ddtcredito: item.detalhes.dDtCredito,
           ncodcc: item.detalhes.nCodCC,
           ncodcliente: item.detalhes.nCodCliente,
-          nvalormovcc: item.detalhes.nValorMovCC
+          nvalormovcc: item.detalhes.nValorMovCC,
+          cnumdocfiscal: item.detalhes.cNumDocFiscal,
+          ndesconto: item.detalhes.nDesconto
         });
     }
 
