@@ -74,7 +74,9 @@ const patchContracts = async (req, res) => {
             "cabecalho": {
               "nCodCtr": item.n_cod_ctr,
               "nCodCli": item.n_cod_cli,
-              "cNumCtr": item.c_num_ctr
+              "cNumCtr": item.c_num_ctr,
+              "dVigInicial": item.d_vig_inicial,
+              "dVigFinal": item.d_vig_final
             },
             "departamentos": [
               {

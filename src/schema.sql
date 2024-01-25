@@ -128,7 +128,9 @@ CREATE TABLE IF NOT EXISTS contracts_to_patch (
   c_num_ctr TEXT NOT NULL,
   cod_dep TEXT NOT NULL,
   n_val_tot_mes DECIMAL NOT NULL,
-  n_cod_cc TEXT NOT NULL
+  n_cod_cc TEXT NOT NULL,
+  d_vig_inicial TEXT NOT NULL,
+  d_vig_final TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS accounts_payable_delete (
@@ -198,11 +200,13 @@ INSERT INTO contracts_to_patch
   c_num_ctr,
   cod_dep,
   n_val_tot_mes,
-  n_cod_cc
+  n_cod_cc,
+  d_vig_inicial,
+  d_vig_final
 )
 VALUES
-(7622403613, 7614590883, '49891547892UX1434', 7562491991, 337, 3032861215),
-(7622403615, 7614590857, '02642979113UX1432', 7562491991, 497.33, 3032861215);
+(7622403613, 7614590883, '49891547892UX1434', 7562491991, 337, 3032861215, '01/08/2023'),
+(7622403615, 7614590857, '02642979113UX1432', 7562491991, 497.33, 3032861215, '01/02/2024');
 
 INSERT INTO baixas_codes
 (
