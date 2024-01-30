@@ -17,6 +17,7 @@ routes.get('/transactions/:id/payables', transactionsController.getPayablesTrans
 
 routes.get('/service-order/:id', serviceOrderController.getServiceOrder);
 routes.post('/service-order', serviceOrderController.postServiceOrder);
+routes.post('/service-order/resend', serviceOrderController.resendServiceOrder);
 
 routes.get('/departments', departmentsController.getAllDepartments);
 

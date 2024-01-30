@@ -137,6 +137,10 @@ CREATE TABLE IF NOT EXISTS accounts_payable_delete (
   codigo_lancamento_omie TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS service_orders_to_resend (
+  c_num_os TEXT NOT NULL
+);
+
 INSERT INTO service_orders
 (nfse, os, turma, valor_liquido, cod_dep)
 VALUES
@@ -223,3 +227,11 @@ INSERT INTO accounts_payable_delete
 VALUES
 ('7535973256'),
 ('7535973258');
+
+INSERT INTO service_orders_to_resend
+(
+  c_num_os
+)
+VALUES
+('14178'),
+('14167');
