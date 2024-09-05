@@ -133,6 +133,20 @@ CREATE TABLE IF NOT EXISTS contracts_to_patch (
   d_vig_final TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS contracts_to_get (
+  n_cod_ctr TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS contracts_to_patch_with_nat_op (
+  n_cod_ctr TEXT NOT NULL,
+  n_cod_cli TEXT NOT NULL,
+  c_num_ctr TEXT NOT NULL,
+  n_cod_cc TEXT NOT NULL,
+  d_vig_inicial TEXT NOT NULL,
+  d_vig_final TEXT NOT NULL,
+  cod_item TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS accounts_payable_delete (
   codigo_lancamento_omie TEXT NOT NULL
 );
@@ -212,6 +226,14 @@ VALUES
 (7622403613, 7614590883, '49891547892UX1434', 7562491991, 337, 3032861215, '01/08/2023'),
 (7622403615, 7614590857, '02642979113UX1432', 7562491991, 497.33, 3032861215, '01/02/2024');
 
+INSERT INTO contracts_to_get
+(
+  n_cod_ctr
+)
+VALUES
+('02850622559DD1421'),
+('12030064629DD1423');
+
 INSERT INTO baixas_codes
 (
   codigo_baixa
@@ -233,5 +255,5 @@ INSERT INTO service_orders_to_resend
   c_num_os
 )
 VALUES
-('14178'),
-('14167');
+(14178),
+(14167);
