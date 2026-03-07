@@ -1,5 +1,6 @@
 const instanciaAxiosOmie = require('../services/omie');
 const knex = require('../conexao');
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const getAccountsReceivable = async (req, res) => {
   const { id } = req.params;
@@ -232,21 +233,44 @@ const addBaixaAccountsReceivable = async (req, res) => {
         app_secret: process.env.OMIE_APP_SECRET,
         param: [
           {
-            "codigo_lancamento": item.codigo_lancamento_omie,
-            "codigo_conta_corrente": item.codigo_conta_corrente,
-            "valor": item.valor,
-            "data": item.datab,
-            "observacao": item.observacao
+            codigo_lancamento: item.codigo_lancamento_omie,
+            codigo_conta_corrente: item.codigo_conta_corrente,
+            valor: item.valor,
+            data: item.datab,
+            observacao: item.observacao
           }
         ]
-      }
+      };
 
-      await instanciaAxiosOmie.post(`financas/contareceber/`, body);
+      try {
+        await instanciaAxiosOmie.post('financas/contareceber/', body);
+        await sleep(2000);
+      } catch (error) {
+        console.error('Erro no item:', {
+          id: item.id,
+          codigo_lancamento_omie: item.codigo_lancamento_omie,
+          codigo_conta_corrente: item.codigo_conta_corrente,
+          valor: item.valor,
+          data: item.datab,
+          observacao: item.observacao,
+          status: error?.response?.status,
+          data_response: error?.response?.data
+        });
+
+        return res.status(error?.response?.status || 500).json({
+          mensagem: 'Erro ao lançar recebimento',
+          item,
+          erro_omie: error?.response?.data || error.message
+        });
+      }
     }
 
     return res.status(201).json(baixaAccountsReceivable);
   } catch (error) {
-    return res.status(400).json({ mensagem: error.message });
+    return res.status(400).json({
+      mensagem: error.message,
+      detalhe: error?.response?.data || null
+    });
   }
 }
 
