@@ -57,7 +57,9 @@ const getAllContracts = async (req, res) => {
           {
             "pagina": currentPage,
             "registros_por_pagina": 100,
-            "apenas_importado_api": "N"
+            "apenas_importado_api": "N",
+            "filtrar_por_data_de": "01/01/2026",
+            "filtrar_por_data_ate": "31/12/2030"
           }
         ]
       }
