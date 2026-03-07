@@ -118,9 +118,11 @@ const getAllAccountsReceivableTwo = async (req, res) => {
       param: [
         {
           "pagina": 1,
-          "registros_por_pagina": 1000,
+          "registros_por_pagina": 100,
           "apenas_importado_api": "N",
-          "filtrar_conta_corrente": filtrar_conta_corrente
+          "filtrar_conta_corrente": filtrar_conta_corrente,
+          "filtrar_por_registro_de": "01/01/2026",
+          "filtrar_por_registro_ate": "31/12/2030"
         }
       ]
     }
@@ -136,9 +138,11 @@ const getAllAccountsReceivableTwo = async (req, res) => {
         param: [
           {
             "pagina": nPagina,
-            "registros_por_pagina": 1000,
+            "registros_por_pagina": 100,
             "apenas_importado_api": "N",
-            "filtrar_conta_corrente": filtrar_conta_corrente
+            "filtrar_conta_corrente": filtrar_conta_corrente,
+            "filtrar_por_registro_de": "01/01/2026",
+            "filtrar_por_registro_ate": "31/12/2030"
           }
         ]
       }
